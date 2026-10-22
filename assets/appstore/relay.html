@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><title>relay</title><body>…
+<script>
+const files=['ipad13-1.png','ipad13-2.png','iphone65-2.png','iphone65-3.png'];
+Promise.all(files.map(f=>fetch(f,{cache:'no-store'}).then(r=>r.arrayBuffer()).then(b=>({name:f,b}))))
+.then(arr=>{ if(window.opener){window.opener.postMessage({partee:arr},'https://appstoreconnect.apple.com');document.body.textContent='envoyé';} else document.body.textContent='pas d’opener'; })
+.catch(e=>document.body.textContent='erreur '+e);
+</script>
